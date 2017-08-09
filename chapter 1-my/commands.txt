@@ -1,0 +1,44 @@
+Cache with automatic expiration: Strings combined with automatic key
+expiration can make a robust cache system using the commands SETEX,
+EXPIRE, and EXPIREAT
+Counting: A counter can easily be implemented with Strings and the
+commands INCR and INCRBY. Good examples of counters are page views,
+video views, and likes. Strings also provide other counting commands, such
+as DECR, DECRBY, and INCRFLOATBY.
+
+
+$ redis-cli
+127.0.0.1:6379> MSET first "First Key value" second "Second Key value"
+OK
+127.0.0.1:6379> MGET first second
+1) "First Key value"
+2) "Second Key value"
+
+
+$ redis-cli
+127.0.0.1:6379> SET current_chapter "Chapter 1"
+OK
+127.0.0.1:6379> EXPIRE current_chapter 10
+(integer) 1
+127.0.0.1:6379> GET current_chapter
+"Chapter 1"
+127.0.0.1:6379> TTL current_chapter
+(integer) 3
+127.0.0.1:6379> TTL current_chapter
+
+
+$ redis-cli
+127.0.0.1:6379> SET counter 100
+OK
+127.0.0.1:6379> INCR counter
+(integer) 101
+127.0.0.1:6379> INCRBY counter 5
+(integer) 106
+127.0.0.1:6379> DECR counter
+(integer) 105
+127.0.0.1:6379> DECRBY counter 100
+(integer) 5
+127.0.0.1:6379> GET counter
+"5"
+127.0.0.1:6379> INCRBYFLOAT counter 2.4
+"7.4"

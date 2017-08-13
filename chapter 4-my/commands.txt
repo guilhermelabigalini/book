@@ -1,0 +1,11 @@
+127.0.0.1:6379> pubsub channels *
+1) "global"
+127.0.0.1:6379> pubsub numsub
+(empty list or set)
+127.0.0.1:6379> pubsub numsub global
+1) "global"
+2) (integer) 2
+127.0.0.1:6379>
+
+127.0.0.1:6379> publish global ping
+(integer) 2

@@ -9,3 +9,55 @@
 
 127.0.0.1:6379> publish global ping
 (integer) 2
+
+127.0.0.1:6379> LPUSH list1 a b
+(integer) 2
+127.0.0.1:6379> OBJECT ENCODING list1
+"ziplist"
+127.0.0.1:6379> LPUSH list2 a b c d
+(integer) 4
+127.0.0.1:6379> OBJECT ENCODING list2
+"linkedlist"
+127.0.0.1:6379> LPUSH list3 "only one element"
+(integer) 1
+127.0.0.1:6379> OBJECT ENCODING list3
+"linkedlist"
+
+127.0.0.1:6379> SADD set1 1 2
+(integer) 2
+127.0.0.1:6379> OBJECT ENCODING set1
+"intset"
+127.0.0.1:6379> SADD set2 1 2 3 4 5
+(integer) 5
+127.0.0.1:6379> OBJECT ENCODING set2
+"hashtable"
+127.0.0.1:6379> SADD set3 a
+(integer) 1
+127.0.0.1:6379> OBJECT ENCODING set3
+"hashtable"
+
+127.0.0.1:6379> HMSET myhash1 a 1 b 2
+OK
+127.0.0.1:6379> OBJECT ENCODING myhash1
+"ziplist"
+127.0.0.1:6379> HMSET myhash2 a 1 b 2 c 3 d 4 e 5 f 6
+OK
+127.0.0.1:6379> OBJECT ENCODING myhash2
+"hashtable"
+127.0.0.1:6379> HMSET myhash3 a 1 b 2 c 3 d 4 e 5 f 6
+OK
+127.0.0.1:6379> OBJECT ENCODING myhash3
+"hashtable"
+
+127.0.0.1:6379> ZADD zset1 1 a
+(integer) 1
+127.0.0.1:6379> OBJECT ENCODING zset1
+"ziplist"
+127.0.0.1:6379> ZADD zset2 1 abcdefghij
+(integer) 1
+127.0.0.1:6379> OBJECT ENCODING zset2
+"skiplist"
+127.0.0.1:6379> ZADD zset3 1 a 2 b 3 c 4 d
+(integer) 4
+127.0.0.1:6379> OBJECT ENCODING zset3
+"skiplist"
